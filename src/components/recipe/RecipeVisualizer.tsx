@@ -10,13 +10,6 @@ export default function RecipeVisualizer({recipe}: RecipeVisualizerProps) {
     return (
         <div className="flex flex-col flex-1">
             <Input
-                id="recipeIdVisualizer"
-                type="number"
-                value={recipe.id}
-                readOnly={true}
-                hidden
-            />
-            <Input
                 id="recipeNameVisualizer"
                 type="text"
                 label="Recipe"

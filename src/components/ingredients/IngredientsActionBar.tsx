@@ -11,9 +11,9 @@ export default function IngredientsActionBar({recipeId}: IngredientManagerProps)
     const [openModalAddIngredient, setOpenModalAddIngredient] = useState(false);
     const deleteRecipeByIdMutation = useDeleteRecipeByIdMutation();
     return (
-        <div className="flex flex-row pl-5 gap-5 justify-center">
-            <button className="max-h-16" onClick={() => deleteRecipeByIdMutation.mutate(recipeId)}>Delete Recipe</button>
-            <button className="max-h-16" onClick={() => setOpenModalAddIngredient(true)}>Add Ingredient</button>
+        <div className="flex flex-row pl-5 gap-5">
+            <button onClick={() => deleteRecipeByIdMutation.mutate(recipeId)}>Delete Recipe</button>
+            <button onClick={() => setOpenModalAddIngredient(true)}>Add Ingredient</button>
             <Modal
                 title={"Add ingredient"}
                 content={

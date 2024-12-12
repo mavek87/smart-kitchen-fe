@@ -8,7 +8,7 @@ interface RecipeManagerProps {
 
 export default function RecipeManager({recipe}: RecipeManagerProps) {
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row items-start">
             <RecipeVisualizer recipe={recipe}/>
             <IngredientsActionBar recipeId={recipe.id}/>
             <hr/>

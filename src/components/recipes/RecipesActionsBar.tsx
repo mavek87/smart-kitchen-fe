@@ -11,7 +11,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
     const [openModalAddRecipe, setOpenModalAddRecipe] = useState(false);
 
     return (
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row gap-5 items-center">
 
             <input
                 className="mt-4"
