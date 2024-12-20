@@ -1,4 +1,6 @@
-const appName = "Smart Kitchen";
-const appVersion = "0.0.5";
-
-export {appName, appVersion};
+export const APP_NAME = "Smart Kitchen";
+export const APP_VERSION = "0.0.6";
+export const LIGHT_THEME = 'light';
+export const DARK_THEME = 'dark';
+export const LIGHT_THEME_BANNER_COLOR = 'bg-blue-900'
+export const DARK_THEME_BANNER_COLOR = 'bg-blue-900'
