@@ -4,7 +4,7 @@ import {routes} from "../../router";
 import {useSelector} from "react-redux";
 import {RootState} from "../../state/store.ts";
 import AuthUserVisualizer from "../AuthUserVisualizer.tsx";
-import {appVersion} from "../../constants";
+import {appName, appVersion} from "../../constants";
 
 export default function Header() {
     const authUser = useSelector((state: RootState) => state.authUserState)
@@ -13,7 +13,7 @@ export default function Header() {
         <header className="flex rounded mt-4 mb-0">
             <article className="flex w-screen gap-14 pb-0">
                 <HeaderNav routeTo={routes.HOMEPAGE_ROUTE}>
-                    <HeaderTitle>Smart Kitchen </HeaderTitle>
+                    <HeaderTitle>{appName}</HeaderTitle>
                 </HeaderNav>
 
                 {

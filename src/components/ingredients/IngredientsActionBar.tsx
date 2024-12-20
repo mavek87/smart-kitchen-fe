@@ -9,10 +9,27 @@ interface IngredientManagerProps {
 
 export default function IngredientsActionBar({recipeId}: IngredientManagerProps) {
     const [openModalAddIngredient, setOpenModalAddIngredient] = useState(false);
+    const [openModalDeleteIngredient, setOpenModalDeleteIngredient] = useState(false);
     const deleteRecipeByIdMutation = useDeleteRecipeByIdMutation();
+
+    const deleteIngredientHandler = () => deleteRecipeByIdMutation.mutate(recipeId);
+
     return (
         <div className="flex flex-row pl-5 gap-5">
-            <button onClick={() => deleteRecipeByIdMutation.mutate(recipeId)}>Delete Recipe</button>
+            <button onClick={() => setOpenModalDeleteIngredient(true)}>Delete Recipe</button>
+            <Modal
+                title={"Delete Recipe"}
+                content={
+                    <p>
+                        Are you sure you want to delete this recipe?
+                    </p>
+                }
+                isModalOpen={openModalDeleteIngredient}
+                onCloseModal={() => setOpenModalDeleteIngredient(oldValue => !oldValue)}
+                onCancelModal={() => setOpenModalDeleteIngredient(false)}
+                onConfirmModal={deleteIngredientHandler}
+            />
+
             <button onClick={() => setOpenModalAddIngredient(true)}>Add Ingredient</button>
             <Modal
                 title={"Add ingredient"}
@@ -23,6 +40,7 @@ export default function IngredientsActionBar({recipeId}: IngredientManagerProps)
                     />
                 }
                 isModalOpen={openModalAddIngredient}
+                modalSize={"large"}
                 onCloseModal={() => setOpenModalAddIngredient(oldValue => !oldValue)}
             />
         </div>

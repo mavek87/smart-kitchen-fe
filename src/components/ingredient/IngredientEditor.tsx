@@ -52,7 +52,8 @@ export default function IngredientEditor({recipeId, closeIngredientHandler}: Ing
                     defaultValue=""
                     ref={refName}
                 />
-                <button type="submit" onClick={saveIngredientHandler}>Save</button>
+                <br/>
+                <button className={"mb-0"} type="submit" onClick={saveIngredientHandler}>Save</button>
             </form>
         </>
     );

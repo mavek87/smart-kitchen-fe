@@ -17,12 +17,14 @@ export default function RecipesManager() {
     return (
         <div>
             <h2>Recipes ({recipes?.length})</h2>
+            <br/>
 
             <RecipesActionsBar
                 filterRecipeName={filterRecipeName}
                 onChangeFilterRecipeName={changeFilterRecipeNameHandler}
             />
 
+            <br/>
             <hr/>
 
             <RecipesVisualizer filterRecipeName={debouncedFilterRecipeName}/>

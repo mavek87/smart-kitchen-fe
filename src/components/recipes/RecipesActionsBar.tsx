@@ -24,6 +24,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
                 title={"Add recipe"}
                 content={<RecipeEditor onCloseRecipeEditor={() => setOpenModalAddRecipe(false)}/>}
                 isModalOpen={openModalAddRecipe}
+                modalSize={"large"}
                 onCloseModal={() => setOpenModalAddRecipe(oldValue => !oldValue)}
             />
 
@@ -33,7 +34,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
             {
                 isSearchRecipeOn &&
                 <input
-                    className="mt-4"
+                    style={{margin: "0"}}
                     type="text"
                     placeholder="Search recipe"
                     value={filterRecipeName}

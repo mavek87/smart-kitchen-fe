@@ -53,7 +53,8 @@ export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
                     defaultValue=""
                     ref={refName}
                 />
-                <button type="submit" onClick={saveRecipeHandler}>Save</button>
+                <br/>
+                <button className={"mb-0"} type="submit" onClick={saveRecipeHandler}>Save</button>
             </form>
         </>
     );

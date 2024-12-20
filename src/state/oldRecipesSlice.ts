@@ -4,6 +4,7 @@ import {IngredientForRecipe, Recipe} from "../types";
 
 const initialState: Recipe[] = [];
 
+// TODO: deprecated. Remove when all its ok
 export const oldRecipesSlice = createSlice({
     name: 'recipes',
     initialState,
