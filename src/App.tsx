@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "./state/store.ts";
 
+// TODO: deprecated
 function App() {
     const authUser = useSelector((state: RootState) => state.authUserState)
 

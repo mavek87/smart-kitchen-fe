@@ -1,8 +1,9 @@
 import type {PayloadAction} from '@reduxjs/toolkit'
 import {createSlice} from '@reduxjs/toolkit'
 import {IngredientForRecipe, Recipe, RecipesState} from "../types";
+import {startingRecipes} from "../data/recipes.ts";
 
-const initialState: RecipesState = {nextId: 1, recipes: []};
+const initialState: RecipesState = startingRecipes;
 
 export const recipesSlice = createSlice({
     name: 'recipes',
@@ -42,6 +43,7 @@ export const recipesSlice = createSlice({
                 }
             });
         },
+        // TODO: fix
         // updateIngredientFromRecipe: (state, action: PayloadAction<IngredientForRecipe>) => {
         //     const recipeId = action.payload.recipeId;
         //     const ingredientToAdd = action.payload.ingredient;
