@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
-import {RootState} from "../state/store.ts";
-import LoginForm from "../components/LoginForm.tsx";
-import RecipesManager from "../components/recipes/RecipesManager.tsx";
+import {RootState} from "../../state/store.ts";
+import RecipesManager from "../recipes/RecipesManager.tsx";
+import LoginForm from "../LoginForm.tsx";
 
 export default function HomePage() {
     const authUser = useSelector((state: RootState) => state.authUserState)

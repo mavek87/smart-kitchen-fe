@@ -1,10 +1,10 @@
 import HeaderNav from "./HeaderNav.tsx";
 import HeaderTitle from "./HeaderTitle.tsx";
-import {routes} from "../../router";
+import {routes} from "../../../router";
 import {useSelector} from "react-redux";
-import {RootState} from "../../state/store.ts";
-import AuthUserVisualizer from "../AuthUserVisualizer.tsx";
-import {appName, appVersion} from "../../constants";
+import {RootState} from "../../../state/store.ts";
+import AuthUserVisualizer from "../../AuthUserVisualizer.tsx";
+import {appName, appVersion} from "../../../constants";
 
 export default function Header() {
     const authUser = useSelector((state: RootState) => state.authUserState)

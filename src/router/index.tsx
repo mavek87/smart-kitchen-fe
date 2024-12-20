@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
-import RootPage from "../pages/RootPage.tsx";
-import HomePage from "../pages/HomePage.tsx";
-import ErrorPage from "../pages/ErrorPage.tsx";
+import RootPage from "../components/pages/RootPage.tsx";
+import HomePage from "../components/pages/HomePage.tsx";
+import ErrorPage from "../components/pages/ErrorPage.tsx";
 
 export const routes = {
     ROOT_ROUTE: "/",

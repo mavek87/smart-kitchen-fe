@@ -1,6 +1,6 @@
-import Header from "../components/pages/Header.tsx";
-import Footer from "../components/pages/Footer.tsx";
-import {routes} from "../router";
+import Header from "./base/Header.tsx";
+import Footer from "./base/Footer.tsx";
+import {routes} from "../../router";
 import {Link} from "react-router-dom";
 
 export default function ErrorPage() {
