@@ -41,9 +41,10 @@ export default function IngredientEditor({recipeId, closeIngredientHandler}: Ing
                 <Input
                     id="ingredientId"
                     type="number"
-                    label="ingredient ID"
+                    // label="ingredient ID"
                     defaultValue=""
                     ref={refId}
+                    hidden
                 />
                 <Input
                     id="ingredientName"

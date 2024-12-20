@@ -40,7 +40,7 @@ export default function IngredientsActionBar({recipeId}: IngredientManagerProps)
                     />
                 }
                 isModalOpen={openModalAddIngredient}
-                modalSize={"large"}
+                modalWidthSize={"xl"}
                 onCloseModal={() => setOpenModalAddIngredient(oldValue => !oldValue)}
             />
         </div>

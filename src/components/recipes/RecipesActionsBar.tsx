@@ -24,7 +24,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
                 title={"Add recipe"}
                 content={<RecipeEditor onCloseRecipeEditor={() => setOpenModalAddRecipe(false)}/>}
                 isModalOpen={openModalAddRecipe}
-                modalSize={"large"}
+                modalWidthSize={"lg"}
                 onCloseModal={() => setOpenModalAddRecipe(oldValue => !oldValue)}
             />
 

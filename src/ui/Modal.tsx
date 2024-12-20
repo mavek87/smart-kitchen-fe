@@ -10,13 +10,8 @@ interface ModalProps {
     onConfirmModal?: (() => void) | undefined;
     cancelButtonName?: string;
     onCancelModal?: (() => void) | undefined;
-    modalSize?: "small" | "medium" | "large" | "xlarge";
+    modalWidthSize?: "sm" | "md" | "lg" | "xl" | "6xl";
 }
-
-const modalSizeSmall = "max-w-sm"
-const modalSizeMedium = "max-w-md"
-const modalSizeLarge = "max-w-lg"
-const modalSizeExtraLarge = "max-w-6xl"
 
 export default function Modal({
                                   title,
@@ -28,29 +23,10 @@ export default function Modal({
                                   onConfirmModal = undefined,
                                   cancelButtonName = "Cancel",
                                   onCancelModal = undefined,
-                                  modalSize
+                                  modalWidthSize = "sm"
                               }: ModalProps) {
-    let size;
-    switch (modalSize) {
-        case "small":
-            size = modalSizeSmall;
-            break;
-        case "medium":
-            size = modalSizeMedium;
-            break;
-        case "large":
-            size = modalSizeLarge;
-            break;
-        case "xlarge":
-            size = modalSizeExtraLarge;
-            break;
-        default:
-            size = modalSizeSmall;
-            break;
-    }
-
     const modalContent = (
-        <article className={size}>
+        <article className={`max-w-${modalWidthSize}`}>
             <header>
                 <button aria-label="Close" rel="prev" onClick={onCloseModal}/>
                 <h4>{title}</h4>
