@@ -8,19 +8,30 @@ interface RecipesActionsBarProps {
 }
 
 export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecipeName}: RecipesActionsBarProps) {
+    const [isSearchRecipeOn, setIsSearchRecipeOn] = useState(false);
     const [openModalAddRecipe, setOpenModalAddRecipe] = useState(false);
+
+    const switchSearchRecipeFilterModeHandler = () => {
+        onChangeFilterRecipeName("");
+        setIsSearchRecipeOn(oldIsSearchRecipe => !oldIsSearchRecipe)
+    }
 
     return (
         <div className="flex flex-row gap-5 items-center">
 
-            <input
-                className="mt-4"
-                type="text"
-                placeholder="Search recipe"
-                value={filterRecipeName}
-                onChange={(event) => onChangeFilterRecipeName(event.target.value)}
-            />
-
+            {
+                isSearchRecipeOn &&
+                <input
+                    className="mt-4"
+                    type="text"
+                    placeholder="Search recipe"
+                    value={filterRecipeName}
+                    onChange={(event) => onChangeFilterRecipeName(event.target.value)}
+                />
+            }
+            <button className="min-w-40" onClick={switchSearchRecipeFilterModeHandler}>
+                {isSearchRecipeOn ? "Remove filter" : "Filter recipes"}
+            </button>
             <button className="min-w-40" onClick={() => setOpenModalAddRecipe(true)}>Add recipe</button>
             <Modal
                 title={"Add recipe"}
@@ -31,4 +42,5 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
 
         </div>
     );
-};
+}
+;
