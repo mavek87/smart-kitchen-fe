@@ -17,6 +17,8 @@ export default function RecipeVisualizer({recipe}: RecipeVisualizerProps) {
                 readOnly={true}
             />
             <IngredientsVisualizer ingredients={recipe.ingredients}/>
+            <hr/>
+            <br/>
         </div>
     );
 };

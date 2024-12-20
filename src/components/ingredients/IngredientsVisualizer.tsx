@@ -11,10 +11,10 @@ export default function IngredientsVisualizer({ingredients}: IngredientsVisualiz
     </li>));
 
     const ingredientsView = ingredients && ingredients.length > 0
-        ? <div className="mt-6">
-            <h6>Ingredients:</h6>
+        ? <details className="mt-6" open>
+            <summary>Ingredients ({ingredients.length}):</summary>
             <ul>{ingredientsListJsx}</ul>
-        </div>
+        </details>
         : null
 
     return (
