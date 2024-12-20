@@ -17,8 +17,8 @@ export default function Header() {
     const themeIcon = isThemeLight ? moonImage : sunImage;
 
     return (
-        <header className="flex rounded mt-4 mb-0">
-            <article className="flex w-screen gap-14 pb-0">
+        <header className="mt-4">
+            <article className="flex gap-14 pb-0">
 
                 <HeaderNav routeTo={routes.HOMEPAGE_ROUTE} className={"flex col items-center"}>
                     <HeaderTitle>{APP_NAME}</HeaderTitle>
