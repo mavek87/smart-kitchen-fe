@@ -7,6 +7,7 @@ interface IngredientEditorProps {
     closeIngredientHandler: () => void;
 }
 
+// TODO: handle the ingredient quantity
 export default function IngredientEditor({recipeId, closeIngredientHandler}: IngredientEditorProps) {
     const refId = useRef<HTMLInputElement>(null);
     const refName = useRef<HTMLInputElement>(null);
@@ -42,7 +43,7 @@ export default function IngredientEditor({recipeId, closeIngredientHandler}: Ing
                     id="ingredientId"
                     type="number"
                     // label="ingredient ID"
-                    defaultValue=""
+                    defaultValue="0"
                     ref={refId}
                     hidden
                 />

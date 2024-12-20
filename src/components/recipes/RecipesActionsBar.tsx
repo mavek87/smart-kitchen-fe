@@ -1,6 +1,6 @@
 import Modal from "../../ui/Modal.tsx";
 import RecipeEditor from "../recipe/RecipeEditor.tsx";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 interface RecipesActionsBarProps {
     filterRecipeName: string;
@@ -8,12 +8,19 @@ interface RecipesActionsBarProps {
 }
 
 export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecipeName}: RecipesActionsBarProps) {
-    const [isSearchRecipeOn, setIsSearchRecipeOn] = useState(false);
+    const [isSearchRecipeFilterOn, setIsSearchRecipeFilterOn] = useState(false);
     const [openModalAddRecipe, setOpenModalAddRecipe] = useState(false);
+    const searchRecipeFilterRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (isSearchRecipeFilterOn) {
+            searchRecipeFilterRef?.current?.focus();
+        }
+    }, [isSearchRecipeFilterOn]);
 
     const switchSearchRecipeFilterModeHandler = () => {
         onChangeFilterRecipeName("");
-        setIsSearchRecipeOn(oldIsSearchRecipe => !oldIsSearchRecipe)
+        setIsSearchRecipeFilterOn(oldIsSearchRecipe => !oldIsSearchRecipe)
     }
 
     return (
@@ -29,16 +36,17 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
             />
 
             <button className="min-w-40" onClick={switchSearchRecipeFilterModeHandler}>
-                {isSearchRecipeOn ? "Remove filter" : "Filter recipes"}
+                {isSearchRecipeFilterOn ? "Remove filter" : "Filter recipes"}
             </button>
             {
-                isSearchRecipeOn &&
+                isSearchRecipeFilterOn &&
                 <input
                     style={{margin: "0"}}
                     type="text"
                     placeholder="Search recipe"
                     value={filterRecipeName}
                     onChange={(event) => onChangeFilterRecipeName(event.target.value)}
+                    ref={searchRecipeFilterRef}
                 />
             }
 

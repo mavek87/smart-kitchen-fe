@@ -5,16 +5,16 @@ import {Link} from "react-router-dom";
 
 export default function ErrorPage() {
     return (
-        <div className="container flex flex-col min-h-screen">
+        <p className="container flex flex-col min-h-screen">
             <Header/>
             <main className="flex flex-grow items-center justify-center">
                 <section className="text-center">
                     <h1>No page found</h1>
-                    <p>Could not find this page...</p>
+                    <div>Could not find this page...</div>
                     <Link to={routes.ROOT_ROUTE}>Return to homepage</Link>
                 </section>
             </main>
             <Footer/>
-        </div>
+        </p>
     );
 }

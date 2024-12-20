@@ -7,9 +7,8 @@ export default function HomePage() {
     const authUser = useSelector((state: RootState) => state.authUserState)
 
     return (
-        // <article className=" w-full">
-        <section className="flex-grow flex items-center justify-center">
-            <article className=" w-full">
+        <section className="flex-grow flex items-center justify-center mb-0">
+            <article className="w-full">
                 {authUser?.isLoggedIn ? <RecipesManager/> : <LoginForm/>}
             </article>
         </section>

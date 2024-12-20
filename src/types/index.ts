@@ -1,5 +1,5 @@
 export interface Ingredient {
-    id: number,
+    id: number | string,
     name: string
 }
 
@@ -14,7 +14,7 @@ export interface IngredientOfRecipe {
 }
 
 export interface IngredientForRecipe {
-    recipeId: number,
+    recipeId: number | string,
     ingredient: IngredientOfRecipe
 }
 

@@ -1,8 +1,8 @@
 import {AuthUser, Ingredient, IngredientForRecipe, IngredientOfRecipe, Recipe} from "../types";
 import {store} from '../state/store';
 import {recipesSlice} from "../state/recipesSlice.ts";
+import { v4 as uuidv4 } from 'uuid';
 
-// Deprecated
 export const fetchIngredients = async (): Promise<Ingredient[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -79,11 +79,11 @@ export const addRecipe = async (recipe: Recipe) => {
 };
 
 export const deleteRecipeById = async (recipeId: number) => {
-    console.log("deleteRecipeById: " + recipeId);
     store.dispatch(recipesSlice.actions.deleteRecipeById(recipeId));
 }
 
 export const addIngredientToRecipe = async (ingredientForRecipe: IngredientForRecipe) => {
+    ingredientForRecipe.ingredient.rowIngredient.id = uuidv4();
     store.dispatch(recipesSlice.actions.addIngredientToRecipe(ingredientForRecipe));
 }
 

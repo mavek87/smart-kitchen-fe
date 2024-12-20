@@ -12,7 +12,7 @@ export default function RecipeVisualizer({recipe}: RecipeVisualizerProps) {
             <Input
                 id="recipeNameVisualizer"
                 type="text"
-                label="Recipe"
+                // label="Recipe"
                 value={recipe.name}
                 readOnly={true}
             />

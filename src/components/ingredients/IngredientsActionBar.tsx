@@ -20,9 +20,9 @@ export default function IngredientsActionBar({recipeId}: IngredientManagerProps)
             <Modal
                 title={"Delete Recipe"}
                 content={
-                    <p>
+                    <div>
                         Are you sure you want to delete this recipe?
-                    </p>
+                    </div>
                 }
                 isModalOpen={openModalDeleteIngredient}
                 onCloseModal={() => setOpenModalDeleteIngredient(oldValue => !oldValue)}
