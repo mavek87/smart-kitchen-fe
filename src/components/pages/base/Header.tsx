@@ -18,7 +18,7 @@ export default function Header() {
 
     return (
         <header className="mt-4">
-            <article className="flex gap-14 pb-0">
+            <article className="flex gap-6 pb-0">
 
                 <HeaderNav routeTo={routes.HOMEPAGE_ROUTE} className={"flex col items-center"}>
                     <HeaderTitle>{APP_NAME}</HeaderTitle>
