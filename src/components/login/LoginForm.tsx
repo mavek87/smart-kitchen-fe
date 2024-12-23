@@ -1,6 +1,8 @@
 import {useDispatch} from "react-redux";
 import {useRef, useState} from "react";
 import {loginAuthUser} from "../../state/authUserSlice.ts";
+import { useNavigate } from "react-router-dom"
+import {routes} from "../../router";
 
 const defaultUsername = "1";
 const defaultPassword = "1";
@@ -13,6 +15,7 @@ export default function LoginForm() {
     const [isInvalidUser, setIsInvalidUser] = useState<undefined | boolean>(undefined);
     const [isInvalidPass, setIsInvalidPass] = useState<undefined | boolean>(undefined);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
@@ -26,7 +29,8 @@ export default function LoginForm() {
                 email: "matver87@gmail.com",
                 isLoggedIn: true
             }
-            dispatch(loginAuthUser(authUser))
+            dispatch(loginAuthUser(authUser));
+            navigate(routes.RECIPES_ROUTE);
         } else {
             setLoginError("Wrong username or password");
             setIsInvalidUser(true);
