@@ -42,7 +42,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
                 isSearchRecipeFilterOn &&
                 <input
                     style={{margin: "0"}}
-                    type="text"
+                    type="search"
                     placeholder="Search recipe"
                     value={filterRecipeName}
                     onChange={(event) => onChangeFilterRecipeName(event.target.value)}
