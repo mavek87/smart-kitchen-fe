@@ -6,11 +6,10 @@ import HomePage from "./HomePage.tsx";
 
 export default function MainPage() {
     const authUser = useSelector((state: RootState) => state.authUserState);
-
-    const wideFullscreenOnLogin = authUser?.isLoggedIn ? "w-full" : "";
+    const isUserLoggedIn = authUser?.isLoggedIn;
     return (
-        <main className="flex-grow flex items-center justify-center">
-            <div className={`flex flex-row ${wideFullscreenOnLogin}`}>
+        <main className={`flex-grow flex ${isUserLoggedIn ? "" : "items-center"} justify-center`}>
+            <div className={`flex flex-row ${isUserLoggedIn ? "w-full" : ""}`}>
                 {authUser?.isLoggedIn
                     ? <>
                         <MainMenu/>
