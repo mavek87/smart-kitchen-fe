@@ -22,7 +22,7 @@ export default function LoginForm() {
 
         if (username === defaultUsername && password === defaultPassword) {
             const authUser = {
-                username: usernameRef?.current?.value || '',
+                username,
                 email: "matver87@gmail.com",
                 isLoggedIn: true
             }
