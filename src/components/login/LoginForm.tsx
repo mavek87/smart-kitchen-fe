@@ -30,7 +30,7 @@ export default function LoginForm() {
                 isLoggedIn: true
             }
             dispatch(loginAuthUser(authUser));
-            navigate(routes.RECIPES_ROUTE);
+            navigate(routes.DASHBOARD_RECIPES_ROUTE);
         } else {
             setLoginError("Wrong username or password");
             setIsInvalidUser(true);

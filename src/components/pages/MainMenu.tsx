@@ -30,10 +30,10 @@ export default function MainMenu() {
                         <nav>
                             <ul>
                                 <h2>Menu</h2>
-                                <li><NavLink to={routes.RECIPES_ROUTE}>Recipes</NavLink></li>
-                                <li><a href="#">Ingredients</a></li>
-                                <li><a href="#">Meal plan</a></li>
-                                <li><a href="#">Settings</a></li>
+                                <li><NavLink to={routes.DASHBOARD_RECIPES_ROUTE}>Recipes</NavLink></li>
+                                <li><NavLink to={routes.DASHBOARD_INGREDIENTS_ROUTE}>Ingredients</NavLink></li>
+                                <li><NavLink to={routes.DASHBOARD_MEALPLAN_ROUTE}>Meal plan</NavLink></li>
+                                <li><NavLink to={routes.DASHBOARD_SETTINGS_ROUTE}>Settings</NavLink></li>
                                 <li><a onClick={logoutHandler}>Logout</a></li>
                             </ul>
                         </nav>
