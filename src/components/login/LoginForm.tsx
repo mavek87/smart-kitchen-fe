@@ -28,7 +28,7 @@ export default function LoginForm() {
             }
             dispatch(loginAuthUser(authUser))
         } else {
-            setLoginError("Username o password errati");
+            setLoginError("Wrong username or password");
             setIsInvalidUser(true);
             setIsInvalidPass(true);
         }
