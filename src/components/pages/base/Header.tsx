@@ -29,8 +29,12 @@ export default function Header() {
                 </HeaderNav>
 
                 <div className={"bg-transparent flex col items-center pb-4"} onClick={toggleTheme}>
-                    <img src={themeIcon} alt="theme icon" className="size-8"
-                         style={{borderRadius: "15%"}}/>
+                    <img
+                        src={themeIcon}
+                        alt="theme icon"
+                        className="size-8"
+                        style={{borderRadius: "15%"}}
+                    />
                 </div>
 
                 {

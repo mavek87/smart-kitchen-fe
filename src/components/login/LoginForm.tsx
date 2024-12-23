@@ -41,49 +41,54 @@ export default function LoginForm() {
     }
 
     return (
-        <article>
-            <label htmlFor="login_username">Username</label>
-            <input
-                type="text"
-                name="login_username"
-                placeholder="Username"
-                aria-label="Username"
-                aria-invalid={isInvalidUser}
-                ref={usernameRef}
-                onChange={resetLoginError}
-                required
-            />
+        <article style={{minWidth: "480px"}}>
+            <h1>Sign in</h1>
 
-            <label htmlFor="login_password">Password</label>
-            <input
-                type="password"
-                name="login_password"
-                placeholder="Password"
-                aria-label="Password"
-                aria-invalid={isInvalidPass}
-                ref={passwordRef}
-                onChange={resetLoginError}
-                required
-            />
+            <form>
+                <label htmlFor="login_username">Username</label>
+                <input
+                    type="text"
+                    name="login_username"
+                    placeholder="username"
+                    aria-label="Username"
+                    aria-invalid={isInvalidUser}
+                    ref={usernameRef}
+                    onChange={resetLoginError}
+                    required
+                />
 
-            <fieldset>
-                <label htmlFor="login_remember_me">
-                    <input type="checkbox"
-                           role="switch"
-                           id="login_remember_me"
-                           name="login_remember_me"
-                           aria-label="Remember me"
-                    />
-                    Remember me
-                </label>
-            </fieldset>
+                <label htmlFor="login_password">Password</label>
+                <input
+                    type="password"
+                    name="login_password"
+                    placeholder="password"
+                    aria-label="Password"
+                    aria-invalid={isInvalidPass}
+                    ref={passwordRef}
+                    onChange={resetLoginError}
+                    required
+                />
 
-            <button type="submit" onClick={event => handleClick(event)}> Login</button>
+                <fieldset>
+                    <label htmlFor="login_remember_me">
+                        <input type="checkbox"
+                               role="switch"
+                               id="login_remember_me"
+                               name="login_remember_me"
+                               aria-label="Remember me"
+                        />
+                        Remember me
+                    </label>
+                </fieldset>
 
-            <br/>
-            <br/>
+                <button type="submit" className={"mb-0"} onClick={handleClick}> Login</button>
 
-            {loginError && <small className={"text-red-700"}><b>{loginError}</b></small>}
+                <br/>
+                <br/>
+
+                {loginError && <small className={"text-red-700"}><b>{loginError}</b></small>}
+
+            </form>
         </article>
     );
 };
