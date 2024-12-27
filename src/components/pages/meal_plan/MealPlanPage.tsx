@@ -4,6 +4,7 @@ import {useRef, useState} from "react";
 
 interface MealsForDay {
     day: number;
+    date: Date;
     meals: Recipe[];
 }
 
@@ -30,14 +31,16 @@ export default function MealPlanPage() {
         }
     }
 
-    const getRandomMealsForDays = (days: number, meals: number): MealsForDay[] => {
+    const getRandomMealsForDays = (startingDate: Date, days: number, meals: number): MealsForDay[] => {
         console.log("getRandomMealsForDays");
 
         const mealsForDays = [];
-        for (let day = 0; day < days + 1; day++) {
+        for (let d = 0; d < days + 1; d++) {
+            const day = d + 1;
+            const date = new Date(startingDate);
+            date.setDate(date.getDate() + d);
             const mealsForDay: MealsForDay = {
-                day: day + 1,
-                meals: new Array<Recipe>()
+                day, date, meals: new Array<Recipe>()
             };
 
             for (let mealNumber = 0; mealNumber < meals; mealNumber++) {
@@ -63,6 +66,7 @@ export default function MealPlanPage() {
             startingDateValue = today;
         }
         const startingDate = new Date(startingDateValue);
+        console.log(startingDate);
 
         let endingDateValue;
         const endingDateRefValue = endingDateRef?.current?.value;
@@ -91,7 +95,7 @@ export default function MealPlanPage() {
             const days = Math.round((endingDate.getTime() - startingDate.getTime()) / (1000 * 3600 * 24));
             console.log(days);
 
-            setMealsPerDays(getRandomMealsForDays(days, numberOfMeals));
+            setMealsPerDays(getRandomMealsForDays(startingDate, days, numberOfMeals));
 
             setStartingDateInvalid(undefined);
             setEndingDateInvalid(undefined);
@@ -187,7 +191,8 @@ export default function MealPlanPage() {
                     <table className="striped" id="meal-plan-table">
                         <thead>
                         <tr>
-                            <th scope="col">Day</th>
+                            <th scope="col">Day #</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Meal</th>
                             <th scope="col">Recipe</th>
                         </tr>
@@ -200,6 +205,8 @@ export default function MealPlanPage() {
                                         mealsForDay.meals.map((meal, index) => (
                                             <tr key={index}>
                                                 <td>{mealsForDay.day}</td>
+
+                                                <td>{mealsForDay.date.toDateString()}</td>
 
                                                 <td>
                                                     {index + 1}
