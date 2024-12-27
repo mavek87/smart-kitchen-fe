@@ -157,14 +157,14 @@ export default function MealPlanPage() {
                 </fieldset>
             </fieldset>
 
-            <fieldset>
-                <button onClick={() => calculateRandomMealsForDays()}>Generate meal plan</button>
+            <fieldset className="grid">
+                <button onClick={() => calculateRandomMealsForDays()}>Generate plan</button>
+                {mealsPerDays && mealsPerDays.length > 0 && <button onClick={() => exportTableToCSV()}>Export plan to CSV</button>}
             </fieldset>
 
             <br/>
 
             <fieldset>
-                <button onClick={exportTableToCSV}>Export plan to CSV</button>
                 <div className="overflow-auto">
                     <table className="striped" id="meal-plan-table">
                         <thead>
