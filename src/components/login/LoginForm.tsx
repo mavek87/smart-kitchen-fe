@@ -61,6 +61,8 @@ export default function LoginForm() {
                     required
                 />
 
+                <fieldset>
+
                 <label htmlFor="login_password">Password</label>
                 <input
                     type="password"
@@ -68,10 +70,14 @@ export default function LoginForm() {
                     placeholder="password"
                     aria-label="Password"
                     aria-invalid={isInvalidPass}
+                    aria-describedby="login-error-helper"
                     ref={passwordRef}
                     onChange={resetLoginError}
                     required
                 />
+                    {loginError &&
+                        <small id="login-error-helper">{loginError}</small>}
+                </fieldset>
 
                 <fieldset>
                     <label htmlFor="login_remember_me">
@@ -85,12 +91,7 @@ export default function LoginForm() {
                     </label>
                 </fieldset>
 
-                <button type="submit" className={"mb-0"} onClick={handleClick}> Login</button>
-
-                <br/>
-                <br/>
-
-                {loginError && <small className={"text-red-700"}><b>{loginError}</b></small>}
+                <button type="submit" onClick={handleClick}> Login</button>
 
             </form>
         </article>

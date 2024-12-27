@@ -12,6 +12,8 @@ export default function MealPlanPage() {
 
     const {data: recipes} = useGetAllRecipesQuery();
     const startingDateRef = useRef<HTMLInputElement>(null);
+    const [startingDateInvalid, setStartingDateInvalid] = useState<boolean | undefined>(undefined);
+    const [endingDateInvalid, setEndingDateInvalid] = useState<boolean | undefined>(undefined);
     const endingDateRef = useRef<HTMLInputElement>(null);
     const numberOfMealsPerDayRef = useRef<HTMLInputElement>(null);
     const [mealsPerDays, setMealsPerDays] = useState<MealsForDay[] | undefined>(undefined);
@@ -53,40 +55,47 @@ export default function MealPlanPage() {
     function calculateRandomMealsForDays() {
         console.log("calculateRandomMealsForDays");
 
-        let numberOfMeals;
-        const numberOfMealsRefValue = numberOfMealsPerDayRef?.current?.value;
-        if (numberOfMealsRefValue) {
-            numberOfMeals = +numberOfMealsRefValue;
-        } else {
-            numberOfMeals = 0;
-        }
-
-        console.log(numberOfMeals);
-
-        let startingDate;
+        let startingDateValue;
         const startingDateRefValue = startingDateRef?.current?.value;
         if (startingDateRefValue) {
-            startingDate = startingDateRefValue;
+            startingDateValue = startingDateRefValue;
         } else {
-            startingDate = today;
+            startingDateValue = today;
         }
+        const startingDate = new Date(startingDateValue);
 
-        console.log(startingDate);
-
-        let endingDate;
+        let endingDateValue;
         const endingDateRefValue = endingDateRef?.current?.value;
         if (endingDateRefValue) {
-            endingDate = endingDateRefValue;
+            endingDateValue = endingDateRefValue;
         } else {
-            endingDate = today;
+            endingDateValue = today;
         }
+        const endingDate = new Date(endingDateValue);
 
-        console.log(endingDate);
+        if (startingDate >= endingDate) {
+            setStartingDateInvalid(true);
+            setEndingDateInvalid(true);
+            return;
+        } else {
+            let numberOfMeals;
+            const numberOfMealsRefValue = numberOfMealsPerDayRef?.current?.value;
+            if (numberOfMealsRefValue) {
+                numberOfMeals = +numberOfMealsRefValue;
+            } else {
+                numberOfMeals = 0;
+            }
 
-        const days = Math.round((new Date(endingDate).getTime() - new Date(startingDate).getTime()) / (1000 * 3600 * 24));
-        console.log(days);
+            console.log(numberOfMeals);
 
-        setMealsPerDays(getRandomMealsForDays(days, numberOfMeals));
+            const days = Math.round((endingDate.getTime() - startingDate.getTime()) / (1000 * 3600 * 24));
+            console.log(days);
+
+            setMealsPerDays(getRandomMealsForDays(days, numberOfMeals));
+
+            setStartingDateInvalid(undefined);
+            setEndingDateInvalid(undefined);
+        }
     }
 
     const exportTableToCSV = () => {
@@ -135,7 +144,11 @@ export default function MealPlanPage() {
                         aria-label="DateTime"
                         defaultValue={today}
                         ref={startingDateRef}
+                        aria-invalid={startingDateInvalid}
+                        aria-describedby="valid-starting-date-helper"
                     />
+                    {startingDateInvalid &&
+                        <small id="valid-starting-date-helper">The starting date must be before the ending date</small>}
                 </fieldset>
 
                 <fieldset>
@@ -146,7 +159,11 @@ export default function MealPlanPage() {
                         aria-label="DateTime"
                         defaultValue={today}
                         ref={endingDateRef}
+                        aria-invalid={endingDateInvalid}
+                        aria-describedby="valid-ending-date-helper"
                     />
+                    {endingDateInvalid &&
+                        <small id="valid-ending-date-helper">The ending date must be after the starting date</small>}
                 </fieldset>
             </fieldset>
 
@@ -159,7 +176,8 @@ export default function MealPlanPage() {
 
             <fieldset className="grid">
                 <button onClick={() => calculateRandomMealsForDays()}>Generate plan</button>
-                {mealsPerDays && mealsPerDays.length > 0 && <button onClick={() => exportTableToCSV()}>Export plan to CSV</button>}
+                {mealsPerDays && mealsPerDays.length > 0 &&
+                    <button onClick={() => exportTableToCSV()}>Export plan to CSV</button>}
             </fieldset>
 
             <br/>
