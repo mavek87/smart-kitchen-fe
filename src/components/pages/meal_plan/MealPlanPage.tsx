@@ -1,12 +1,6 @@
 import {useGetAllRecipesQuery} from "../../../hooks/useQueries.ts";
-import {Recipe} from "../../../types";
+import {MealsForDay, Recipe} from "../../../types";
 import {useRef, useState} from "react";
-
-interface MealsForDay {
-    day: number;
-    date: Date;
-    meals: Recipe[];
-}
 
 export default function MealPlanPage() {
     const today = new Date().toISOString().split("T")[0];
@@ -32,8 +26,6 @@ export default function MealPlanPage() {
     }
 
     const getRandomMealsForDays = (startingDate: Date, days: number, meals: number): MealsForDay[] => {
-        console.log("getRandomMealsForDays");
-
         const mealsForDays = [];
         for (let d = 0; d < days + 1; d++) {
             const day = d + 1;
@@ -55,27 +47,20 @@ export default function MealPlanPage() {
         return mealsForDays;
     }
 
+    function getDateFromInputRef(inputRef: React.RefObject<HTMLInputElement>, today: string) {
+        let dateValue;
+        const dateRefValue = inputRef?.current?.value;
+        if (dateRefValue) {
+            dateValue = dateRefValue;
+        } else {
+            dateValue = today;
+        }
+        return new Date(dateValue);
+    }
+
     function calculateRandomMealsForDays() {
-        console.log("calculateRandomMealsForDays");
-
-        let startingDateValue;
-        const startingDateRefValue = startingDateRef?.current?.value;
-        if (startingDateRefValue) {
-            startingDateValue = startingDateRefValue;
-        } else {
-            startingDateValue = today;
-        }
-        const startingDate = new Date(startingDateValue);
-        console.log(startingDate);
-
-        let endingDateValue;
-        const endingDateRefValue = endingDateRef?.current?.value;
-        if (endingDateRefValue) {
-            endingDateValue = endingDateRefValue;
-        } else {
-            endingDateValue = today;
-        }
-        const endingDate = new Date(endingDateValue);
+        const startingDate = getDateFromInputRef(startingDateRef, today);
+        const endingDate = getDateFromInputRef(endingDateRef, today);
 
         if (startingDate >= endingDate) {
             setStartingDateInvalid(true);
@@ -90,10 +75,7 @@ export default function MealPlanPage() {
                 numberOfMeals = 0;
             }
 
-            console.log(numberOfMeals);
-
             const days = Math.round((endingDate.getTime() - startingDate.getTime()) / (1000 * 3600 * 24));
-            console.log(days);
 
             setMealsPerDays(getRandomMealsForDays(startingDate, days, numberOfMeals));
 

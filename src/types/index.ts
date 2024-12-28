@@ -34,3 +34,9 @@ export interface AuthUser {
     email: string | null,
     isLoggedIn: boolean
 }
+
+export interface MealsForDay {
+    day: number;
+    date: Date;
+    meals: Recipe[];
+}
