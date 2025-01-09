@@ -7,7 +7,7 @@ interface IngredientVisualizerProps {
 export default function IngredientVisualizer({ingredient = undefined}: IngredientVisualizerProps) {
     return (
         <>
-            {ingredient && <div>{ingredient.rowIngredient.name} | {ingredient.rowIngredient.id}</div>}
+            {ingredient && <div>{ingredient.rowIngredient.name} {ingredient.quantity.value} {ingredient.quantity.unit}</div>}
         </>
     );
 };
