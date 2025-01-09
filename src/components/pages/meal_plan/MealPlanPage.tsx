@@ -1,6 +1,7 @@
 import {useGetAllRecipesQuery} from "../../../hooks/useQueries.ts";
 import {MealsForDay, Recipe} from "../../../types";
 import {useRef, useState} from "react";
+import Accordion from "../../../ui/Accordion.tsx";
 
 export default function MealPlanPage() {
     const today = new Date().toISOString().split("T")[0];
@@ -185,6 +186,7 @@ export default function MealPlanPage() {
                                 <>
                                     {
                                         mealsForDay.meals.map((meal, index) => (
+                                            // <Accordion title={meal.name} content={
                                             <tr key={index}>
                                                 <td>{mealsForDay.day}</td>
 
@@ -195,9 +197,16 @@ export default function MealPlanPage() {
                                                 </td>
 
                                                 <td>
-                                                    {meal.name}
+                                                    <Accordion title={meal.name} content={
+                                                        <ul>
+                                                            {meal.ingredients.map(ingredient =>
+                                                                <li>{ingredient.rowIngredient.name} {ingredient.quantity.value} {ingredient.quantity.unit}</li>
+                                                            )}
+                                                        </ul>
+                                                    }/>
                                                 </td>
                                             </tr>
+                                            // }/>
                                         ))
                                     }
                                 </>
