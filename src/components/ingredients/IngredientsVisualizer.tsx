@@ -7,12 +7,17 @@ interface IngredientsVisualizerProps {
 }
 
 export default function IngredientsVisualizer({ingredients}: IngredientsVisualizerProps) {
-    const ingredientsListJsx = ingredients?.map((ingredient => <li key={ingredient.rowIngredient.id}>
-        <IngredientVisualizer ingredient={ingredient}/>
-    </li>));
+    const ingredientsListJsx = ingredients?.map(ingredient => <li key={ingredient.rowIngredient.id}>
+            <IngredientVisualizer ingredient={ingredient}/>
+        </li>
+    );
 
     const ingredientsView = ingredients && ingredients.length > 0
-        ? <Accordion className="mt-4" title={`Ingredients (${ingredients.length}):`} content={<ul>{ingredientsListJsx}</ul>} />
+        ? <Accordion
+            className="mt-4"
+            title={`Ingredients (${ingredients.length}):`}
+            content={<ul>{ingredientsListJsx}</ul>}
+        />
         : null
 
     return (

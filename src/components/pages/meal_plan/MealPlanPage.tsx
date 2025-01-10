@@ -1,8 +1,10 @@
 import {useGetAllRecipesQuery} from "../../../hooks/useQueries.ts";
 import {MealsForDay, Recipe} from "../../../types";
-import {useRef, useState} from "react";
+import {RefObject, useRef, useState} from "react";
 import Accordion from "../../../ui/Accordion.tsx";
 import IngredientVisualizer from "../../ingredient/IngredientVisualizer.tsx";
+import {calculateRandomMealsForDays} from "../../../domain/mealService.tsx";
+import {exportTableToCSV} from "../../../domain/csvService.tsx";
 
 export default function MealPlanPage() {
     const today = new Date().toISOString().split("T")[0];
@@ -15,41 +17,11 @@ export default function MealPlanPage() {
     const numberOfMealsPerDayRef = useRef<HTMLInputElement>(null);
     const [mealsPerDays, setMealsPerDays] = useState<MealsForDay[] | undefined>(undefined);
 
-    function getRandomRecipeIndex(max: number): number {
-        return Math.floor(Math.random() * (max + 1));
+    if (!recipes) {
+        throw new Error("No recipes found");
     }
 
-    function getRandomRecipe(): Recipe | null {
-        if (recipes) {
-            return recipes[getRandomRecipeIndex(recipes.length - 1)];
-        } else {
-            return null;
-        }
-    }
-
-    const getRandomMealsForDays = (startingDate: Date, days: number, meals: number): MealsForDay[] => {
-        const mealsForDays = [];
-        for (let d = 0; d < days + 1; d++) {
-            const day = d + 1;
-            const date = new Date(startingDate);
-            date.setDate(date.getDate() + d);
-            const mealsForDay: MealsForDay = {
-                day, date, meals: new Array<Recipe>()
-            };
-
-            for (let mealNumber = 0; mealNumber < meals; mealNumber++) {
-                const randomRecipe = getRandomRecipe();
-                if (randomRecipe) {
-                    mealsForDay.meals.push(randomRecipe);
-                }
-            }
-
-            mealsForDays.push(mealsForDay);
-        }
-        return mealsForDays;
-    }
-
-    function getDateFromInputRef(inputRef: React.RefObject<HTMLInputElement>, today: string) {
+    function getDateFromInputRef(inputRef: RefObject<HTMLInputElement>, today: string) {
         let dateValue;
         const dateRefValue = inputRef?.current?.value;
         if (dateRefValue) {
@@ -60,10 +32,7 @@ export default function MealPlanPage() {
         return new Date(dateValue);
     }
 
-    function calculateRandomMealsForDays() {
-        const startingDate = getDateFromInputRef(startingDateRef, today);
-        const endingDate = getDateFromInputRef(endingDateRef, today);
-
+    function setRandomMealsForDaysInView(recipes: Recipe[], startingDate: Date, endingDate: Date) {
         if (startingDate >= endingDate) {
             setStartingDateInvalid(true);
             setEndingDateInvalid(true);
@@ -79,44 +48,11 @@ export default function MealPlanPage() {
 
             const days = Math.round((endingDate.getTime() - startingDate.getTime()) / (1000 * 3600 * 24));
 
-            setMealsPerDays(getRandomMealsForDays(startingDate, days, numberOfMeals));
-
+            setMealsPerDays(calculateRandomMealsForDays(recipes, startingDate, days, numberOfMeals));
             setStartingDateInvalid(undefined);
             setEndingDateInvalid(undefined);
         }
     }
-
-    const exportTableToCSV = () => {
-        const table = document.getElementById('meal-plan-table') as HTMLTableElement | null;
-
-        if (!table) {
-            console.error('Table non found');
-            return;
-        }
-
-        let csvContent = '';
-
-        // Itera le righe della tabella (header e body)
-        for (const row of Array.from(table.rows)) {
-            const rowData: string[] = [];
-            for (const cell of Array.from(row.cells)) {
-                rowData.push(cell.textContent?.trim() || ''); // Ottiene il contenuto della cella
-            }
-            csvContent += rowData.join(',') + '\n'; // Unisce i dati con la virgola e aggiunge una nuova riga
-        }
-
-        // Crea un file Blob con i dati CSV
-        const blob = new Blob([csvContent], {type: 'text/csv'});
-        const url = URL.createObjectURL(blob);
-
-        // Crea un link per scaricare il file
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'meal-plan.csv';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    };
 
     return (
         <div>
@@ -163,9 +99,15 @@ export default function MealPlanPage() {
             </fieldset>
 
             <fieldset className="grid">
-                <button onClick={() => calculateRandomMealsForDays()}>Generate plan</button>
-                {mealsPerDays && mealsPerDays.length > 0 &&
-                    <button onClick={() => exportTableToCSV()}>Export plan to CSV</button>}
+                <button
+                    onClick={() => setRandomMealsForDaysInView(recipes, getDateFromInputRef(startingDateRef, today), getDateFromInputRef(endingDateRef, today))}
+                >
+                    Generate plan
+                </button>
+                {
+                    mealsPerDays && mealsPerDays.length > 0 &&
+                    <button onClick={exportTableToCSV}>Export plan to CSV</button>
+                }
             </fieldset>
 
             <br/>
@@ -200,13 +142,13 @@ export default function MealPlanPage() {
                                                     <Accordion title={meal.name} content={
                                                         <ul>
                                                             {meal.ingredients.map(ingredient =>
-                                                                <li key={ingredient.rowIngredient.id}><IngredientVisualizer ingredient={ingredient}/></li>
+                                                                <li key={ingredient.rowIngredient.id}>
+                                                                    <IngredientVisualizer ingredient={ingredient}/></li>
                                                             )}
                                                         </ul>
                                                     }/>
                                                 </td>
                                             </tr>
-                                            // }/>
                                         ))
                                     }
                                 </>
