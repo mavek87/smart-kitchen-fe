@@ -1,4 +1,4 @@
-import {RecipesState} from "../types";
+import {MealType, RecipesState} from "../types";
 
 const startingRecipes: RecipesState = {
     nextId: 5,
@@ -6,7 +6,7 @@ const startingRecipes: RecipesState = {
         {
             id: 1,
             name: "Carbonara",
-            mealTypes: ["lunch", "dinner"],
+            mealTypes: [MealType.lunch, MealType.dinner],
             ingredients: [
                 {
                     rowIngredient: {
@@ -53,25 +53,25 @@ const startingRecipes: RecipesState = {
         {
             id: 2,
             name: "Cheeseburger",
-            mealTypes: ["lunch", "dinner"],
+            mealTypes: [MealType.lunch, MealType.dinner],
             ingredients: []
         },
         {
             id: 3,
             name: "Ramen",
-            mealTypes: ["lunch", "dinner"],
+            mealTypes: [MealType.lunch, MealType.dinner],
             ingredients: []
         },
         {
             id: 4,
             name: "Matriciana",
-            mealTypes: ["lunch", "dinner"],
+            mealTypes: [MealType.lunch, MealType.dinner],
             ingredients: []
         },
         {
             id: 5,
             name: "Cappuccino & cornetto",
-            mealTypes: ["breakfast"],
+            mealTypes: [MealType.breakfast],
             ingredients: []
         }
     ]

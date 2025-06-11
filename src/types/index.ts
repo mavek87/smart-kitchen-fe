@@ -25,7 +25,13 @@ export interface Recipe {
     ingredients: IngredientOfRecipe[]
 }
 
-export type MealType = "breakfast" | "lunch" | "dinner" | "snack";
+// export type MealType = "breakfast" | "lunch" | "dinner" | "snack";
+export enum MealType {
+    breakfast = "Breakfast",
+    lunch = "Lunch",
+    dinner = "Dinner",
+    snack = "Snack"
+}
 
 export interface RecipesState {
     nextId: number;
