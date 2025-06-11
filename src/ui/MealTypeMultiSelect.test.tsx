@@ -25,7 +25,7 @@ describe("MealTypeMultiSelect", () => {
             selected: [MealType.snack],
         },
     ])(
-        "renders correctly when selected = $selected",
+        "renders correctly (checkbox checked) when selected = $selected",
         ({selected}) => {
             render(<MealTypeMultiSelect value={selected}/>);
 
@@ -85,7 +85,6 @@ describe("MealTypeMultiSelect", () => {
 
             await user.click(checkbox);
 
-            // Deve restare checked perché non c'è onChange che possa modificarlo
             expect(checkbox).toBeChecked();
         }
     );
