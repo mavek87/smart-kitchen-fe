@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 export default function ErrorPage() {
     return (
-        <p className="container flex flex-col min-h-screen">
+        <div className="container flex flex-col min-h-screen">
             <Header/>
             <main className="flex flex-grow items-center justify-center">
                 <section className="text-center">
@@ -15,6 +15,6 @@ export default function ErrorPage() {
                 </section>
             </main>
             <Footer/>
-        </p>
+        </div>
     );
 }

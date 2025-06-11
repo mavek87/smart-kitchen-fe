@@ -21,8 +21,11 @@ export interface IngredientForRecipe {
 export interface Recipe {
     id: number,
     name: string,
+    mealTypes: MealType[],
     ingredients: IngredientOfRecipe[]
 }
+
+export type MealType = "breakfast" | "lunch" | "dinner" | "snack";
 
 export interface RecipesState {
     nextId: number;

@@ -7,6 +7,7 @@ import HomePage from "./HomePage.tsx";
 export default function MainPage() {
     const authUser = useSelector((state: RootState) => state.authUserState);
     const isUserLoggedIn = authUser?.isLoggedIn;
+    console.log("isUserLoggedIn: " + isUserLoggedIn);
     return (
         <main className={`flex-grow flex ${isUserLoggedIn ? "" : "items-center"} justify-center`}>
             <div className={`flex flex-row ${isUserLoggedIn ? "w-full" : ""}`}>

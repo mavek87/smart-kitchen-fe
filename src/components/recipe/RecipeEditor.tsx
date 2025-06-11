@@ -1,6 +1,8 @@
 import {useAddRecipeMutation} from "../../hooks/useMutations.ts";
 import React, {useRef} from "react";
 import Input from "../../ui/Input.tsx";
+import {MealTypeMultiSelect} from "../../ui/MealTypeMultiSelect.tsx";
+import {MealType} from "../../types";
 
 interface RecipeEditorProps {
     onCloseRecipeEditor: () => void;
@@ -9,6 +11,7 @@ interface RecipeEditorProps {
 export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
     const refId = useRef<HTMLInputElement>(null);
     const refName = useRef<HTMLInputElement>(null);
+    const [mealTypes, setMealTypes] = React.useState<MealType[]>([]);
 
     const addRecipeMutation = useAddRecipeMutation();
 
@@ -25,6 +28,7 @@ export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
                 {
                     id: +recipeId,
                     name: recipeName,
+                    mealTypes,
                     ingredients: []
                 }
             )
@@ -45,6 +49,7 @@ export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
                     ref={refId}
                     hidden
                 />
+
                 <Input
                     id="recipeName"
                     type="text"
@@ -53,7 +58,11 @@ export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
                     defaultValue=""
                     ref={refName}
                 />
+
+                <MealTypeMultiSelect value={mealTypes} onChange={setMealTypes}/>
+
                 <br/>
+
                 <button className={"mb-0"} type="submit" onClick={saveRecipeHandler}>Save</button>
             </form>
         </>

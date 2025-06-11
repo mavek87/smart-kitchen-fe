@@ -21,15 +21,11 @@ export default function MealPlanPage() {
         throw new Error("No recipes found");
     }
 
-    function getDateFromInputRef(inputRef: RefObject<HTMLInputElement>, today: string) {
-        let dateValue;
-        const dateRefValue = inputRef?.current?.value;
-        if (dateRefValue) {
-            dateValue = dateRefValue;
-        } else {
-            dateValue = today;
+    function getDateFromInputRef(inputRef: RefObject<HTMLInputElement | null>, today: string): Date {
+        if (inputRef.current && inputRef.current.value) {
+            return new Date(inputRef.current.value);
         }
-        return new Date(dateValue);
+        return new Date(today);
     }
 
     function setRandomMealsForDaysInView(recipes: Recipe[], startingDate: Date, endingDate: Date) {

@@ -6,6 +6,7 @@ const startingRecipes: RecipesState = {
         {
             id: 1,
             name: "Carbonara",
+            mealTypes: ["lunch", "dinner"],
             ingredients: [
                 {
                     rowIngredient: {
@@ -52,16 +53,25 @@ const startingRecipes: RecipesState = {
         {
             id: 2,
             name: "Cheeseburger",
+            mealTypes: ["lunch", "dinner"],
             ingredients: []
         },
         {
             id: 3,
             name: "Ramen",
+            mealTypes: ["lunch", "dinner"],
             ingredients: []
         },
         {
             id: 4,
             name: "Matriciana",
+            mealTypes: ["lunch", "dinner"],
+            ingredients: []
+        },
+        {
+            id: 5,
+            name: "Cappuccino & cornetto",
+            mealTypes: ["breakfast"],
             ingredients: []
         }
     ]
