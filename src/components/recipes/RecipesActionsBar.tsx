@@ -26,7 +26,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
     return (
         <div className="flex flex-row gap-5 items-center">
 
-            <button className="min-w-40" onClick={() => setOpenModalAddRecipe(true)}>Add recipe</button>
+            <button className="min-w-40 outline" onClick={() => setOpenModalAddRecipe(true)}>Add recipe</button>
             <Modal
                 title={"Add recipe"}
                 content={<RecipeEditor onCloseRecipeEditor={() => setOpenModalAddRecipe(false)}/>}
@@ -35,7 +35,7 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
                 onCloseModal={() => setOpenModalAddRecipe(oldValue => !oldValue)}
             />
 
-            <button className="min-w-40" onClick={switchSearchRecipeFilterModeHandler}>
+            <button className="min-w-40 outline" onClick={switchSearchRecipeFilterModeHandler}>
                 {isSearchRecipeFilterOn ? "Remove filter" : "Filter recipes"}
             </button>
             {
