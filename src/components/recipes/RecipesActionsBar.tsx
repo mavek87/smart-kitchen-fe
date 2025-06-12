@@ -35,4 +35,3 @@ export default function RecipesActionsBar({filterRecipeName, onChangeFilterRecip
         </div>
     );
 }
-;
