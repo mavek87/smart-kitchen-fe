@@ -2,13 +2,14 @@ import {useAddRecipeMutation} from "../../hooks/useMutations.ts";
 import React, {useRef} from "react";
 import Input from "../../ui/Input.tsx";
 import {MealTypeMultiSelect} from "../../ui/MealTypeMultiSelect.tsx";
-import {MealType} from "../../types";
+import {MealType, Recipe} from "../../types";
 
 interface RecipeEditorProps {
+    recipe?: Recipe;
     onCloseRecipeEditor: () => void;
 }
 
-export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
+export default function RecipeEditor({recipe, onCloseRecipeEditor}: RecipeEditorProps) {
     const refId = useRef<HTMLInputElement>(null);
     const refName = useRef<HTMLInputElement>(null);
     const [mealTypes, setMealTypes] = React.useState<MealType[]>([]);
@@ -55,7 +56,7 @@ export default function RecipeEditor({onCloseRecipeEditor}: RecipeEditorProps) {
                     type="text"
                     label="Recipe name"
                     placeholder="recipe name"
-                    defaultValue=""
+                    defaultValue={recipe?.name}
                     ref={refName}
                 />
 

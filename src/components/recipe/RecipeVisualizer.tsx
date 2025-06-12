@@ -19,8 +19,6 @@ export default function RecipeVisualizer({recipe}: RecipeVisualizerProps) {
             />
             <MealTypeMultiSelect value={recipe.mealTypes} />
             <IngredientsVisualizer ingredients={recipe.ingredients}/>
-            <hr/>
-            <br/>
         </div>
     );
 };
